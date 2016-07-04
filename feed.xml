@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kushal Jayswal</title>
+    <description>Front End Development and WordPress</description>
+    <link>http://kjayz.com</link>
+    <atom:link href="http://kjayz.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Defining JavaScript Functions with Namespace</title>
+        <description>&lt;p&gt;I was working on a small jQuery plugin, where I wanted to define a common jQuery &lt;code class=&quot;highlighter-rouge&quot;&gt;function&lt;/code&gt; to be used multiple times as per requirement. This may be a nested function declarion at some point.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-nested-javascript-function&quot;&gt;Example: Nested JavaScript Function&lt;/h3&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// function 1&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;function x fired&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// function 2&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;function y fired&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// calling&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Above code run &lt;code class=&quot;highlighter-rouge&quot;&gt;x()&lt;/code&gt; first and then &lt;code class=&quot;highlighter-rouge&quot;&gt;y()&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;function y()&lt;/code&gt; has a call of another function &lt;code class=&quot;highlighter-rouge&quot;&gt;x()&lt;/code&gt; therefore it will be firing up &lt;code class=&quot;highlighter-rouge&quot;&gt;alert(&#39;function y fired&#39;)&lt;/code&gt; first and then &lt;code class=&quot;highlighter-rouge&quot;&gt;alert(&#39;function x fired&#39;)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now let’s come to the main part! Below is a way to define functions more better way - using NAMESPACE.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-nested-javascript-function-using-namespace-methodology&quot;&gt;Example: Nested JavaScript Function using Namespace methodology&lt;/h3&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;nx&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;something&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;hello there!&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;bodyInfo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;body&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;attr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;id&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+    
+    &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    
+&lt;span class=&quot;p&quot;&gt;})(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jQuery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;ns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;ns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bodyInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.sitepoint.com/community/t/jquery-calling-function-from-other-script/8006/4&quot;&gt;Snippet Credit&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;further-reading&quot;&gt;Further Reading&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://javascriptweblog.wordpress.com/2010/12/07/namespacing-in-javascript/&quot;&gt;Namespacing in JavaScript&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://yuiblog.com/blog/2010/12/14/strict-mode-is-coming-to-town/&quot;&gt;Strict Mode Is Coming To Town&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 17 Nov 2015 00:00:00 +0000</pubDate>
+        <link>http://kjayz.com/journal/defining-javascript-functions-with-namespace/</link>
+        <guid isPermaLink="true">http://kjayz.com/journal/defining-javascript-functions-with-namespace/</guid>
+      </item>
+    
+      <item>
+        <title>Spent Diwali 2015 at Ujjain</title>
+        <description>&lt;p&gt;Somewhere before 3-4 months the planning for a &lt;a href=&quot;https://en.wikipedia.org/wiki/Diwali&quot;&gt;Diwali&lt;/a&gt; vacation trip had started. Initially it was planned for &lt;a href=&quot;https://en.wikipedia.org/wiki/Pachmarhi&quot;&gt;Panchmadhi&lt;/a&gt; but due to pregnancy of one of the member (Pooja Mehta - brother-in-law’s wife) in the family, we changed the plan to &lt;a href=&quot;https://en.wikipedia.org/wiki/Ujjain&quot;&gt;Ujjain&lt;/a&gt;. Because of heavy rush we couldn’t get reservation and had to take &lt;a href=&quot;http://www.indianrail.gov.in/tatkal_Scheme.html&quot;&gt;Tatkal&lt;/a&gt; tickets.&lt;/p&gt;
+
+&lt;p&gt;Well! this trips was with my in-laws, including my wife (Kinjal Jayswal) of course:) and I really enjoyed it but we had to passed through some really bad situations too. Hats off to Indian Railway and uncle Viresh (travel agent).&lt;/p&gt;
+
+&lt;h2 id=&quot;the-start&quot;&gt;The Start&lt;/h2&gt;
+&lt;p&gt;The day &lt;em&gt;November 9, 2015&lt;/em&gt;, we left around 7:30 PM (IST) for the Kalupur railway station to catch the train. The only tarin available was the &lt;strong&gt;Sabarmati Express&lt;/strong&gt;, which takes to long way to &lt;a href=&quot;https://en.wikipedia.org/wiki/Varanasi&quot;&gt;Varanasi&lt;/a&gt;, starting from &lt;a href=&quot;https://en.wikipedia.org/wiki/Ahmedabad&quot;&gt;Ahmedabad&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The boggy was quiet full with people travelling to their native place Varanasi / &lt;a href=&quot;https://en.wikipedia.org/wiki/Lucknow&quot;&gt;Lukhnaw&lt;/a&gt;, etc. to meet their family (once in a year) and celebrate the Diwali festival. Usually Diwali is the bigest festival in India and IRCTC must take care by adding extra boggies to avoid extra crowd. I don’t understand why the tickets has been sold even after the full. This is really rediculous, there was no meaning of the reservation. The compartment was open for everyone to come in and join the already overcrowded boggy.&lt;/p&gt;
+
+&lt;p&gt;If men are traveling alone then it can be managed sometime but reservation is preferable while we travel with family, with elder ladies. People were flying over the crowd with support of rodes like a Spiderman. But this situation is the worst in the country for women. And as the train gooes to longer way there was no chance that some people might left the train at some destination as most of the people from crowd travelling to Varanasi or Lucknow. Our destination was Ujjain and ladies has to suffer 8-9 hours in this overcrowded boggy.&lt;/p&gt;
+
+&lt;p&gt;After all this I learnt not to plan a trip during Diwali or if you had to then plan properly well in advance.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-first-day&quot;&gt;The First Day&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;November 10, 2015&lt;/em&gt;, the very first day at Ujjain (Madhya Pradesh). It was aroud 7:30 AM we reached out here.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-parrot-tree&quot;&gt;The Parrot Tree&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;//yourshot.nationalgeographic.com/u/fQYSUbVfts-T7pS2VP2wnKyN8wxywmXtY0-Fwsgxpi0437KSiiSbl8VEuCzVHCP0FcAQL17EbLXpN1xCOr1-Uxl-ARhdVsJSYUO-hrd15Fe0ZE1SVLgMJjASr0y4Nzdqx2iW9P-bJ0FgOvjuXVyLdPzzcCkxQjRgHgtSvhl5oiC16UuA2mU4ktZz1EBaVekfclf01N44ku9oDD0VZA/&quot; alt=&quot;The Parrot Tree&quot; /&gt;
+&lt;a href=&quot;http://yourshot.nationalgeographic.com/photos/4308541/&quot;&gt;PC&lt;/a&gt;
+This was the attraction at the Ujjain railway station. The tree with lot of parrots on it. Infect, parrots seems like leaves of the tree and you would only realize that these are parrot birds and not the leaves, when they fly out. Really nature has many hidden magic like this, just awesome!&lt;/p&gt;
+
+&lt;p&gt;We have a in-laws family relative over there in Ujjain. After reaching to his home, we took bath and relaxed for few hours as we all tiered by long restless journey.&lt;/p&gt;
+
+&lt;h2 id=&quot;iscon-temple-ujjain&quot;&gt;Iscon Temple, Ujjain&lt;/h2&gt;
+&lt;p&gt;In the evening we planned to see nearby palces. One of them was Iscon temple. It was quiet good and peaceful. We enjoyed some sweet dishes there. So delicious!!&lt;/p&gt;
+&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3668.248377964473!2d75.79692981435704!3d23.161133216948667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3963747d89ac2feb%3A0x87c2c195426454de!2sISKCON+Temple%2C+Guest+House!5e0!3m2!1sen!2sin!4v1461156600575&quot; width=&quot;600&quot; height=&quot;450&quot; frameborder=&quot;0&quot; style=&quot;border:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;the-mahakal-temple&quot;&gt;The Mahakal Temple&lt;/h2&gt;
+&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.6568075687846!2d75.76602911435745!3d23.182722616142364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3963743638ffffff%3A0x3024e4d1bd13cc22!2sMahakaleshwar+Jyotirlinga!5e0!3m2!1sen!2sin!4v1461159803743&quot; width=&quot;600&quot; height=&quot;450&quot; frameborder=&quot;0&quot; style=&quot;border:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Actually the Ujjain is famous for its temples. So it’s not like that I am fond of going temples only. Infect I hate that. But there is not much spaces in Ujjain to go. The next day we tried to go to very popular &lt;strong&gt;Mahakal Temple&lt;/strong&gt; but unfortunately it was overcrowded and it couldn’t happened. We tried the same way for 3 times. But really, people has made that religiois space like a commercial hub. If you go there, you would find 2 different queues. One for general (which usually longer one, endless). You need to spend 2-3 hour normally to see the lord Shiva. Second is the VIP queue, where you can spend Rs.150-200 per individual and join the shorter queue.&lt;/p&gt;
+
+&lt;p&gt;In my opinion, this is something deviding people’s thought to the worst side. The people who can spen money can be allowed to see the god first!!! Poor Indian mentality! Isn’t it??? I am strictly against it.&lt;/p&gt;
+
+&lt;p&gt;FYI, Mahakal is one of the Jyotirlinga, so possibility there many people around the world come to complete their religious vow. And most of people who believes in such mentality are below the middle class level. So they have to wait long hours.&lt;/p&gt;
+
+&lt;p&gt;One more thing, to visit the temple, we need to keep all our belongings outside of the temple in a safe locker. Including our mobile and wallet. Why? For mobile, it make some sense but today no girl is safe without mobile. This should not be encouraged more.&lt;/p&gt;
+
+&lt;p&gt;I am HINDU and I am religious too, not against to our culture. But I don’t like fake people and useless or logicless beliefs and “have to do” kind of things. Likewise Mahakal temple, I have seen the same thing at many places. The Girnar montain also has the same tradition for Guru Dattatrey temple, people forced to contribute money in a temple to see the god. If you do so then only you can go ahead in the queue or else you cannot see the god even after climbing up to this much height.&lt;/p&gt;
+
+&lt;p&gt;So there are many negative things we have to bare in India. The only tagline “I LOVE MY INDIA” is not the all. We should really mean it in positive manner. Too much frustation… Leave it!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;INTERESTING FACT&lt;/strong&gt;: Temple’s “Poojari” &lt;em&gt;(a dedicated person who take care of temple’s timings and other devotional activities)&lt;/em&gt; is one of the richest person of the Ujjain, he owned a 2-3 floor bunglow with a elevator :). How? That you have to think!!!&lt;/p&gt;
+
+&lt;h2 id=&quot;the-movie-time-prem-ratan-dhan-payo&quot;&gt;The Movie Time, Prem Ratan Dhan Payo&lt;/h2&gt;
+&lt;p&gt;3rd day we planned for a movie - Prem Ratan Dhan Payo as per family demand. I don’t like the movie anyway. But I was happy that I had to spend very less amount on the movie ticket than Ahmedabad.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/bPk9bSvQQoc&quot; frameborder=&quot;0&quot; align=&quot;center&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;the-food-and-usual-days&quot;&gt;The Food and Usual Days&lt;/h2&gt;
+&lt;p&gt;I love one thing. People are very engergatic, no tiredness at all. I went for a day with Chhoti along with Kinjal and really enjoyed. Ujjain is a small city and they closed down some roads in the morning for jogging, sketting and other children activities. I also like the big gardens. And most important, it’s polutionless. So neat and clean air!!!&lt;/p&gt;
+
+&lt;p&gt;I am from Ahmedabad. Ahmedabadis are generally foody and here food is too costly. In Ujjain we can get dilicisious food at very very low spend. But again it’s hygienic enough to eat.&lt;/p&gt;
+
+&lt;p&gt;As I visited Ujjain last Diwali, I forgot some of the things and I would update if it strike my mind in the future.&lt;/p&gt;
+
+&lt;p&gt;Lastly, I would like to thank Manishbhai, Payalbhabhi, Bhavi, Dixa and all family members for their hospitality and love. Speicially to Bhahiji for dilicious food.&lt;/p&gt;
+
+&lt;p&gt;Thank you very much for standing by and reading this long story.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 16 Nov 2015 00:00:00 +0000</pubDate>
+        <link>http://kjayz.com/journal/diwali-2015-at-ujjain/</link>
+        <guid isPermaLink="true">http://kjayz.com/journal/diwali-2015-at-ujjain/</guid>
+      </item>
+    
+      <item>
+        <title>Launched My Personal Site (kjayz.com)</title>
+        <description>&lt;p&gt;Although all pages are not ubpdated with the content yet. I am eager to launch my new personal site. And if you are reading this post then you found it and you’re welcome :).&lt;/p&gt;
+
+&lt;h3 id=&quot;how-it-all-started&quot;&gt;How it all started?&lt;/h3&gt;
+&lt;p&gt;I was planning from long to develop a personal site, where I can publish my &lt;a href=&quot;/notes&quot;&gt;thoughts&lt;/a&gt;, &lt;a href=&quot;/projects&quot;&gt;work&lt;/a&gt; and work-in-progress. At that time, I had decided to go with WordPress (as I am more comfortable with it), but latter I decided to adopt &lt;a href=&quot;http://jekyllrb.com&quot; title=&quot;Static Site Generator&quot;&gt;Jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-jekyll&quot;&gt;Why Jekyll?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Jekyll&lt;/strong&gt; is superb framework, which allows you to create a dynamic site with static pages. You don’t have to spend a penny for hosting. You can simply create a base directory with user.github.io and start deploying your site with Github pages with no cost.&lt;/p&gt;
+
+&lt;h3 id=&quot;published-with-https&quot;&gt;Published with HTTPS&lt;/h3&gt;
+&lt;p&gt;As per Google’s latest algorythm update, the domain HTTPS will be given more priority for the ranking. So I decided to move with HTTPS. Also HTTPS means all data between user and me, communicated with encrypted socket. I don’t know much on this but there is nothing wrong to Google and gain the knowledge a bit :).&lt;/p&gt;
+
+&lt;h3 id=&quot;in-progress&quot;&gt;In Progress&lt;/h3&gt;
+&lt;p&gt;As mentioned in the start, the site has launched but yet not complete. I am creating the pages and working on the best suitable design yet. So you are welcome, if you anything to say. Connect with me socially or shoot an email available on the site.&lt;/p&gt;
+
+&lt;p&gt;Thanks&lt;/p&gt;
+</description>
+        <pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate>
+        <link>http://kjayz.com/journal/launched-personal-site/</link>
+        <guid isPermaLink="true">http://kjayz.com/journal/launched-personal-site/</guid>
+      </item>
+    
+  </channel>
+</rss>
